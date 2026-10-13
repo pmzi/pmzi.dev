@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404: you went too deep</title>
+  <meta name="description" content="This page does not exist. You went too deep.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#050505">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23050505'/%3E%3Ccircle cx='32' cy='32' r='14' fill='%23FFC53D'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&amp;family=Inter:wght@400;500;700&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap">
+  <link rel="stylesheet" href="/assets/site.css">
+  <style>
+    body { background: var(--color-core-bg); color: var(--color-core-ink); }
+
+    .lost {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      padding: 48px var(--pl);
+      overflow: hidden;
+      --accent: var(--color-core-accent);
+    }
+
+    .lost .label { color: var(--accent); }
+
+    .lost h1 {
+      font-family: var(--font-display);
+      font-size: clamp(88px, 30vw, 240px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 0.9;
+    }
+
+    .lost p:not(.label) { font-size: 18px; line-height: 27px; max-width: 420px; opacity: 0.85; }
+
+    .lost a {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      min-height: 56px;
+      padding: 0 24px;
+      border-radius: 16px;
+      background: var(--accent);
+      color: var(--color-core-bg);
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .lost .coin {
+      top: -60px;
+      animation: fall 5s cubic-bezier(.5, 0, .9, .6) infinite;
+      animation-delay: var(--d);
+      left: var(--x);
+      width: var(--s);
+      height: var(--s);
+      --glow: 24px;
+    }
+
+    @keyframes fall {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(110svh); opacity: 0.2; }
+    }
+
+    @media (min-width: 1024px) {
+      .lost { padding-inline: clamp(96px, 9.72vw, 140px); }
+    }
+  </style>
+</head>
+<body>
+  <main class="lost">
+    <span class="coin" style="--x:12%;--s:28px;--d:0s" aria-hidden="true"></span>
+    <span class="coin" style="--x:38%;--s:20px;--d:1.4s" aria-hidden="true"></span>
+    <span class="coin" style="--x:64%;--s:34px;--d:2.6s" aria-hidden="true"></span>
+    <span class="coin" style="--x:86%;--s:24px;--d:0.8s" aria-hidden="true"></span>
+
+    <p class="label">Layer 99 / Not found</p>
+    <h1>404</h1>
+    <p>You went too deep. There is nothing down here but a few coins.</p>
+    <a href="/">Back to the surface</a>
+  </main>
+</body>
+</html>
