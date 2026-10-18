@@ -45,4 +45,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # The action's default wrangler is too old to read wrangler.jsonc.
+          wranglerVersion: '4'
           command: ${{ github.ref_name == 'main' && 'deploy' || 'versions upload' }}
