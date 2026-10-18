@@ -20,6 +20,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    # The Cloudflare secrets live in the "production" environment, and a job only
+    # receives environment secrets if it names the environment.
+    environment: production
     steps:
       - uses: actions/checkout@v4
 
