@@ -3,7 +3,8 @@
 :root {
   --color-surface-bg: #FFF0A8;
   --color-surface-ink: #1F1B12;
-  --color-surface-accent: #2F6BFF;
+  --color-surface-accent: #8FA8E8; /* the blog's primary, periwinkle */
+  --color-surface-accent-strong: #4A63C9; /* periwinkle dark enough for outlines on the yellow ground */
   --color-browser-bg: #A8D4F5;
   --color-browser-ink: #0A2540;
   --color-browser-accent: #FFD23F;
@@ -213,7 +214,7 @@ button { font: inherit; color: inherit; }
   -webkit-tap-highlight-color: transparent;
 }
 
-.surface-name.is-inspected { outline-color: var(--accent); }
+.surface-name.is-inspected { outline-color: var(--color-surface-accent-strong); }
 
 .lead { font-size: 18px; line-height: 27px; max-width: 290px; }
 
