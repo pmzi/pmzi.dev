@@ -1,8 +1,9 @@
-name: Deploy to Cloudflare Pages
+name: Deploy to Cloudflare Workers
 
-# Every push builds the site and publishes it to Cloudflare Pages.
-# Pushes to `main` go to production (pmzi.dev); every other branch gets its own
-# preview URL (<branch>.<project>.pages.dev).
+# Every push builds the site and publishes it to the `pmzi-dev` Cloudflare Worker
+# (static assets, see wrangler.jsonc). Pushes to `main` deploy to production
+# (pmzi.dev); every other branch is uploaded as a version, which does not touch
+# production.
 on:
   push:
   workflow_dispatch:
@@ -39,9 +40,9 @@ jobs:
       # Also fails on invalid post slugs and bad frontmatter.
       - run: npm run build
 
-      - name: Publish dist/ to Cloudflare Pages
+      - name: Publish dist/ to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist --project-name=${{ vars.CLOUDFLARE_PAGES_PROJECT || 'pmzi-dev' }} --branch=${{ github.ref_name }} --commit-hash=${{ github.sha }} --commit-dirty=true
+          command: ${{ github.ref_name == 'main' && 'deploy' || 'versions upload' }}

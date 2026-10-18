@@ -50,19 +50,16 @@ Build output directory: `dist`. Files in `public/` (home, `mocha-or-latte/`, `40
 at `/sitemap-index.xml` (the home page is added by hand in `astro.config.mjs`;
 `/mocha-or-latte/` is `noindex`, so it is left out).
 
-## Deploy (GitHub Actions to Cloudflare Pages)
+## Deploy (GitHub Actions to Cloudflare Workers)
 
+The site is served by the `pmzi-dev` Cloudflare Worker using static assets (`wrangler.jsonc`).
 `.github/workflows/deploy.yml` runs on every push: `npm ci`, `npm run check`, `npm run build`, then
-publishes `dist/` to Cloudflare Pages. `main` is production (pmzi.dev); other branches get a preview URL.
+`wrangler deploy` for `main` (production, pmzi.dev). Other branches run `wrangler versions upload`, which
+creates a version without touching production.
 
-One-time setup:
+Setup (done once):
 
-1. In Cloudflare, create a Pages project of type **Direct Upload** (named `pmzi-dev`, or set the repo
-   variable `CLOUDFLARE_PAGES_PROJECT` to the name you used) and attach the `pmzi.dev` custom domain.
-   Its production branch must be `main`.
-2. Create an API token with **Account > Cloudflare Pages > Edit**.
-3. In the GitHub repo (Settings > Secrets and variables > Actions) add secrets `CLOUDFLARE_API_TOKEN` and
-   `CLOUDFLARE_ACCOUNT_ID`.
-
-A Pages project connected to Git builds on its own; use a Direct Upload project instead, or the site is
-built twice.
+1. API token with **Workers Scripts: Edit** (the "Edit Cloudflare Workers" template) for the account.
+2. GitHub secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`, stored in the `production` environment.
+3. If the Worker is also connected to Git in the dashboard (Settings > Builds), disconnect it, or the site is
+   built twice.

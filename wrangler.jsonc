@@ -1,0 +1,10 @@
+{
+  // Static site served by Cloudflare Workers Static Assets (no Worker script).
+  // The name must match the existing Worker in the Cloudflare dashboard.
+  "name": "pmzi-dev",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "404-page"
+  }
+}
