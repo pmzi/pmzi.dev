@@ -193,8 +193,6 @@ button { font: inherit; color: inherit; }
   max-width: 440px;
 }
 
-.toy__title { /* uses .label */ color: var(--accent); }
-
 /* Surface: inspect me */
 
 .surface-name {
@@ -457,7 +455,6 @@ button { font: inherit; color: inherit; }
   will-change: transform;
 }
 
-.coins__cap { position: absolute; left: 0; bottom: 0; }
 
 /* Beyond */
 
@@ -646,16 +643,11 @@ html.js:not(.sdt) .reveal.in { opacity: 1; transform: none; }
 
 /* ── Desktop ────────────────────────────────────────── */
 
-.only-desktop { display: none; }
-
 @media (min-width: 1024px) {
   :root {
     --pl: clamp(96px, 9.72vw, 140px);
     --pr: clamp(96px, 9.72vw, 140px);
   }
-
-  .only-mobile { display: none; }
-  .only-desktop { display: inline; }
 
   .layer { padding-block: 96px; }
   .layer--surface { padding-top: 96px; }
