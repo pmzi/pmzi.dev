@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import Footer from '../../components/Footer.astro';
+import { getPosts, readingMinutes, isoDay } from '../../lib/posts';
+
+const posts = await getPosts();
+const description = 'Notes on the way down the stack: front-end, Node, Rails, payments. Written for future me.';
+---
+<Base title="Notes | pmzi.dev" description={description} path="/notes/">
+  <section class="intro reveal" style="--i:1">
+    <p class="prompt">$ cat README<span class="caret" aria-hidden="true"></span></p>
+    <p class="lead">Notes on the way down the stack: front-end, Node, Rails, payments. Written for future me.</p>
+  </section>
+
+  <section class="listing" aria-labelledby="ls">
+    <h2 id="ls" class="prompt listing-head reveal" style="--i:2">$ ls -t<span class="caret" aria-hidden="true"></span></h2>
+    <ul class="rows">
+      {posts.map((post, n) => (
+        <li class="reveal" style={`--i:${n + 3}`}>
+          <a class="row" href={`/notes/${post.id}/`}>
+            <time class="date" datetime={isoDay(post.data.date)}>{isoDay(post.data.date)}</time>
+            <span class="title"><span>{post.data.title}</span></span>
+            <span class="layer">{post.data.layer}</span>
+            <span class="read">{readingMinutes(post.body)}m</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <Footer slot="footer" variant="index" index={posts.length + 3} />
+</Base>

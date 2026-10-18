@@ -1,0 +1,16 @@
+---
+// index: © left, github/linkedin right (stacked, links first, on mobile).
+// post:  back link left, © right; "· Vancouver" is dropped on mobile.
+interface Props { variant?: 'index' | 'post'; index?: number }
+const { variant = 'index', index = 9 } = Astro.props;
+---
+<footer class={`site-footer site-footer--${variant} reveal`} style={`--i:${index}`}>
+  {variant === 'post' && <a class="link back" href="/notes/">← cd ../notes</a>}
+  <p class="copy">© 2026 Pouya<span class:list={['city', { 'city-hide-mobile': variant === 'post' }]}> · Vancouver</span></p>
+  {variant === 'index' && (
+    <nav class="social" aria-label="Elsewhere">
+      <a class="link" href="https://github.com/pmzi" rel="noopener">GitHub</a>
+      <a class="link" href="https://www.linkedin.com/in/pomzi" rel="noopener">LinkedIn</a>
+    </nav>
+  )}
+</footer>

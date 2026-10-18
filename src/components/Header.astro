@@ -1,0 +1,12 @@
+---
+interface Props { active?: 'notes' }
+const { active = 'notes' } = Astro.props;
+---
+<header class="site-header reveal" style="--i:0">
+  <a class="brand" href="/notes/">pmzi.dev ~/notes</a>
+  <nav aria-label="Main">
+    <a class="nav-link" href="/notes/" aria-current={active === 'notes' ? 'page' : undefined}>notes</a>
+    <a class="nav-link" href="/">home</a>
+    <a class="nav-link" href="/rss.xml">rss</a>
+  </nav>
+</header>

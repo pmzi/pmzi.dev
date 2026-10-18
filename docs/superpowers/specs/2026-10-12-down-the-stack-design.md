@@ -67,7 +67,7 @@ public/
 docs/                         # not deployed
 ```
 
-Cloudflare Pages settings: framework preset None, build command empty, build output directory `public`. Pages serves `mocha-or-latte/index.html` at `/mocha-or-latte`. Use root-absolute paths for assets (`/assets/...`) so both pages resolve them.
+Cloudflare Pages settings: build command `npm run build`, build output directory `dist` (Astro builds the blog from `src/`; `public/` is copied into `dist/` unchanged, so the Down the Stack and Mocha or Latte pages still ship as hand-written HTML). The earlier "framework preset None, no build command, output `public`" setup no longer applies. Pages serves `mocha-or-latte/index.html` at `/mocha-or-latte`. Use root-absolute paths for assets (`/assets/...`) so both pages resolve them.
 
 Each page stays independent (own CSS/JS, no shared runtime), so the side project can move to its own project later without changes.
 

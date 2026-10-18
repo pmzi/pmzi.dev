@@ -5,4 +5,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://pmzi.dev/sitemap.xml
+Sitemap: https://pmzi.dev/sitemap-index.xml

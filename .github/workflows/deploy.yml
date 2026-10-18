@@ -1,0 +1,44 @@
+name: Deploy to Cloudflare Pages
+
+# Every push builds the site and publishes it to Cloudflare Pages.
+# Pushes to `main` go to production (pmzi.dev); every other branch gets its own
+# preview URL (<branch>.<project>.pages.dev).
+on:
+  push:
+  workflow_dispatch:
+
+# A newer push to the same branch cancels the run still in flight.
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  deployments: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22 # Astro 7 needs >= 22.12
+          cache: npm
+
+      - run: npm ci
+
+      # Type-checks .astro and .ts files; fails the deploy on errors.
+      - run: npm run check
+
+      # Also fails on invalid post slugs and bad frontmatter.
+      - run: npm run build
+
+      - name: Publish dist/ to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=${{ vars.CLOUDFLARE_PAGES_PROJECT || 'pmzi-dev' }} --branch=${{ github.ref_name }} --commit-hash=${{ github.sha }} --commit-dirty=true
