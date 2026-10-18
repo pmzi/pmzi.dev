@@ -522,7 +522,10 @@ button { font: inherit; color: inherit; }
 }
 
 .resume ul { display: flex; flex-direction: column; gap: 14px; margin: 0; padding: 8px 0 0; list-style: none; }
-.resume li { display: flex; gap: 12px; }
+.resume li { display: flex; align-items: baseline; gap: 12px; }
+/* A label belongs to the list under it: tight below, extra air above. */
+.resume .label + ul { padding-top: 0; }
+.resume ul + .label { margin-top: 16px; }
 
 .resume__when {
   flex-shrink: 0;
