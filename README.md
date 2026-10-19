@@ -1,6 +1,6 @@
 # pmzi.dev
 
-Personal site. The home page (`/`) and `/mocha-or-latte/` are hand-written HTML in `public/`.
+Personal site. The home page (`/`) is hand-written HTML in `public/`.
 The blog is an [Astro](https://astro.build) static site: Markdown posts in `src/content/posts/`
 built to plain HTML. Posts live at `pmzi.dev/notes/<slug>/`. The post index is at `/notes/`.
 
@@ -45,10 +45,9 @@ comment). It exercises the TL;DR, headings and a code block. Delete it before pu
 ## Deployment (Cloudflare Pages)
 
 Single project on pmzi.dev. Framework preset: Astro (or None). Build command: `npm run build`.
-Build output directory: `dist`. Files in `public/` (home, `mocha-or-latte/`, `404.html`,
-`_headers`, `robots.txt`, `assets/`) are copied into `dist/` unchanged. The sitemap is generated
-at `/sitemap-index.xml` (the home page is added by hand in `astro.config.mjs`;
-`/mocha-or-latte/` is `noindex`, so it is left out).
+Build output directory: `dist`. Files in `public/` (home, `404.html`,
+`robots.txt`, `assets/`) are copied into `dist/` unchanged. The sitemap is generated
+at `/sitemap-index.xml` (the home page is added by hand in `astro.config.mjs`).
 
 ## Deploy (GitHub Actions to Cloudflare Workers)
 

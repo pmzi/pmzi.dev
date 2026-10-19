@@ -14,7 +14,6 @@ export default defineConfig({
     mdx(),
     react(),
     // The home page (/) is hand-written HTML in public/, so Astro can't see it.
-    // /mocha-or-latte/ is deliberately left out: it is noindex.
     sitemap({ customPages: ['https://pmzi.dev/'] }),
   ],
   markdown: {
